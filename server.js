@@ -38,6 +38,14 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
+app.get('/me', function(req, res) {
+  if (!req.user) {
+    return res.sendStatus(404);
+  } else {
+    res.status(200).send(req.user);
+  }
+})
+
 var port = config.PORT;
 app.listen(port, function() {
 	console.log('Listening on port ' + port);
